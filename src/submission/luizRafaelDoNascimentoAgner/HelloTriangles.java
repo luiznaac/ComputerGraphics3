@@ -31,7 +31,7 @@ public class HelloTriangles {
     Vertex a = new Vertex(new Point(10, 200), red);
     Vertex b = new Vertex(new Point(200, 10), green);
     Vertex c = new Vertex(new Point(370, 460), blue);
-
+    
     // create a simple shader for the first triangle
     Shader simple = new SimpleAmbientShader();
 
@@ -39,7 +39,7 @@ public class HelloTriangles {
     Triangle t1 = new Triangle(a, b, c, simple);
     t1.draw(g, dim, true);
     BufferedImage img1 = assignment.ImageHelper.copy(img); // save image 1
-
+    
     // define a new vertex for the second triangle
     Vertex d = new Vertex(new Point(30, 450), blue);
 
@@ -73,17 +73,17 @@ public class HelloTriangles {
     Shader bump = new BumpPhongShader(phong, 50, 0.3f);
 
     // create and draw the fourth triangle
-    //Triangle t4 = new Triangle(b, e, c, bump);
-   // t4.draw(g, dim);
-   // t1.drawWireframe(g); // draw wireframe of the first triangle on top again
- //   BufferedImage img3 = assignment.ImageHelper.copy(img); // save image 3
+    Triangle t4 = new Triangle(b, e, c, bump);
+    t4.draw(g, dim);
+    t1.drawWireframe(g); // draw wireframe of the first triangle on top again
+    BufferedImage img3 = assignment.ImageHelper.copy(img); // save image 3
 
     // ATTENTION: Do not change the following code lines for your submission!
     // You are required to use ImageHelper.saveAndDisplay(...) from the package assignment
     // to display and save your solution images.
     assignment.ImageHelper.saveAndDisplay(img1, "SimpleTriangle.png");
     assignment.ImageHelper.saveAndDisplay(img2, "PhongTriangles.png");
- //   assignment.ImageHelper.saveAndDisplay(img3, "BumpyTriangles.png");
+    assignment.ImageHelper.saveAndDisplay(img3, "BumpyTriangles.png");
   }
 
 }

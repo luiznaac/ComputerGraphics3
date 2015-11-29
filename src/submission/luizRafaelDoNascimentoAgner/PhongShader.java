@@ -8,10 +8,11 @@ import static java.lang.Math.pow;
  *
  */
 public class PhongShader implements Shader {
-   private Triangle triangle;
-   private float ka, kd, ks;
-   private float a0, a1, a2, s;
-   private Point viewer, light;
+   public Triangle triangle;
+   public float ka, kd, ks;
+   public float a0, a1, a2, s;
+   public Point viewer, light;
+   public Vertex surface;
   /**
    * @param viewer position
    * @param light position
@@ -35,7 +36,6 @@ public class PhongShader implements Shader {
    * @param phong another Phong shader instance
    */
   public PhongShader(PhongShader phong) {
-    // TODO: implement this method and the rest of this class necessary for the assignment
   }
   
   @Override
@@ -45,6 +45,7 @@ public class PhongShader implements Shader {
   
   @Override
   public Color shade(Vertex surface) {
+    this.surface = surface;
     this.setValues(surface);
     float r, g, b, ra, ga, ba, dprod, sprod, h;
     Vector reflect, view;
@@ -77,11 +78,12 @@ public class PhongShader implements Shader {
     return new Color(r, g, b);
   }
   
-  private void setValues(Vertex surface){
+  public void setValues(Vertex surface){
         a0 = (new SimpleTriangle(triangle.getV1().getPoints(), triangle.getV2().getPoints(), surface.getPoints())).getArea()/triangle.getArea();
         a1 = (new SimpleTriangle(triangle.getV2().getPoints(), triangle.getV0().getPoints(), surface.getPoints())).getArea()/triangle.getArea();
         a2 = (new SimpleTriangle(triangle.getV0().getPoints(), triangle.getV1().getPoints(), surface.getPoints())).getArea()/triangle.getArea();
   }  
+  
   private Vector calcNormal(){
         return (new Vector(a0*triangle.getV0().getNormal().x + a1*triangle.getV1().getNormal().x + a2*triangle.getV2().getNormal().x, 
                           a0*triangle.getV0().getNormal().y + a1*triangle.getV1().getNormal().y + a2*triangle.getV2().getNormal().y, 

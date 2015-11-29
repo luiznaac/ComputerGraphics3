@@ -25,6 +25,14 @@ public class Vector {
       return x*v.x+y*v.y+z*v.z;
   }
   
+  public Vector crossProduct(Vector v){
+      float x1, y1, z1;
+      x1 = v.x;
+      y1 = v.y;
+      z1 = v.z;
+      return new Vector(y*z1 - y1*z, x1*z - x*z1, x*y1 - x1*y);
+  }
+  
   @Override
   public String toString(){
       return "(" + x + ", " + y + ", " + z + ")";
